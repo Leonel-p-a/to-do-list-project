@@ -34,13 +34,13 @@ export function showMenu() {
                     console.log('\nError: Please, enter a valid status (pending or completed).');
                     status = prompt("Whats is the task's status (pending | completed): ").toLowerCase().trim();
                 }
-                
+
                 taskService.addTask({
                     id: 0,
                     title,
                     status
                 });
-                console.log("✅ Task succesfully added!");
+                console.log("Task succesfully added!");
                 break;
 
             case "2":
@@ -48,7 +48,7 @@ export function showMenu() {
                 if (tasks.length === 0) {
                     console.log("📭 No task registered.");
                 } else {
-                    console.log("\n📋 Task list:");
+                    console.log("\nTask list:");
                     tasks.forEach(task => {
                         console.log(`[${task.id}] ${task.title} - ${task.status}`);
                     });
@@ -58,38 +58,42 @@ export function showMenu() {
             case "3":
                 const idToComplete = Number(prompt("Enter the ID of the task to be completed: "));
                 const allTasks = taskService.listTasks();
-                const t = allTasks.find(t => t.id === idToComplete);
+                const taskToComplete = allTasks.find(t => t.id === idToComplete);
 
                 if (!idToComplete) {
                     console.log('Invalid ID!');
                     break;
-                } else if (t?.status === 'completed') {
+                } else if (taskToComplete?.status === 'completed') {
                     console.log('Task is already completed!');
                     break;
                 }
 
                 taskService.completeTask(idToComplete);
-                console.log("✅ Task completed!");
+                console.log("Task completed!");
                 break;
 
             case "4":
                 const idToRemove = Number(prompt("Enter the ID of the task to be removed: "));
+                const tasksToRemove = taskService.listTasks();
+                const taskToRemove = tasksToRemove.find(task => task.id === idToRemove);
 
                 if (!idToRemove) {
                     console.log('Invalid ID!');
                     break;
+                } else if (!taskToRemove) {
+                    console.log('Task not found!');
+                    break;
                 }
-
                 taskService.removeTask(idToRemove);
-                console.log("🗑️ Task removed!");
+                console.log("Task removed!");
                 break;
 
             case "0":
-                console.log("👋 Exiting...");
+                console.log("Exiting...");
                 break;
 
             default:
-                console.log("⚠️ Invalid option, try again.");
+                console.log("Invalid option, try again.");
         }
     } while (option !== "0");
 }
