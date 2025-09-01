@@ -1,0 +1,24 @@
+{
+  "name": "simple_to_do_list_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "dev": "npx tsc -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/prompt-sync": "^4.2.3",
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
